@@ -12,13 +12,13 @@ The model predicts a person's salary based on a number other parameters like wor
 Census data from https://archive.ics.uci.edu/ml/datasets/census+income has been used for both training and testing using a train-test-split of scikit learn.
 
 ## Metrics
-Overall model performance:
+The overall model performance is as follows.
 * Precision: 0.7502
 * Recall: 0.6213
 * F1: 0.6797
 
 ## Ethical Considerations
-The used dataset is highly biased. The following are rounded values:
+The used dataset is highly biased. The following are rounded values.
 * 90% native to the United-States
 * 2/3 male, 1/3 female
 * 85% white, 10% black, about 5% other races
