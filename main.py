@@ -48,6 +48,13 @@ class InferenceRequest(pydantic.BaseModel):
 
 @app.post("/infer")
 async def inference(request: InferenceRequest):
+    model = model_dict["model"]
+    print("Debugging info:")
+    print(type(model_dict["model"]))
+    print(model_dict["model"])
+    print(dir(model_dict["model"]))
+    print(dir(model_dict["model"].get_params()))
+    print("End debugging info.")
     try:
       data = pandas.DataFrame([fastapi.encoders.jsonable_encoder(request)])
       x, _, _, _ = ml.data.process_data(data, categorical_features=ml.data.categorical_features, training=False,
