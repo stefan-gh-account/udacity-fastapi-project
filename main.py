@@ -48,9 +48,12 @@ class InferenceRequest(pydantic.BaseModel):
 
 @app.post("/infer")
 async def inference(request: InferenceRequest):
-    data = pandas.DataFrame([fastapi.encoders.jsonable_encoder(request)])
-    x, _, _, _ = ml.data.process_data(data, categorical_features=ml.data.categorical_features, training=False,
-                                      encoder=model_dict["encoder"])
-    salary_prediction = model_dict["model"].predict(x).reshape(-1, 1)
-    salaries = model_dict["label_binarizer"].inverse_transform(salary_prediction)
-    return {"salary": salaries[0]}
+    try:
+      data = pandas.DataFrame([fastapi.encoders.jsonable_encoder(request)])
+      x, _, _, _ = ml.data.process_data(data, categorical_features=ml.data.categorical_features, training=False,
+                                        encoder=model_dict["encoder"])
+      salary_prediction = model_dict["model"].predict(x).reshape(-1, 1)
+      salaries = model_dict["label_binarizer"].inverse_transform(salary_prediction)
+      return {"salary": salaries[0]}
+    except Exception as e:
+      return {"error": str(e)}

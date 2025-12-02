@@ -16,4 +16,6 @@ input_dict = {"age":39,
               "native-country":"United-States"}
 
 response = requests.post(url, json=input_dict)
+print(response.status_code)
+print(response.text)
 print(response.json())
